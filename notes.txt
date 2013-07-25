@@ -1,0 +1,197 @@
+
+
+Distributed Patterns in Action
+==============================
+git.io/MYrjpQ
+
+
+"Good Enough" is Good Enough
+============================
+www.aleax.it/oscon13_geige.pdf
+
+
+Unsung DevOps Tools
+===================
+  => mussh
+    -> easily conduct one-off tasks on machines
+    -> works in parallel
+  => RANCID
+    -> automate infrastructure
+    -> log changes
+    -> machine consistency
+    -> shrubbery.net/rancid
+  => lldpd
+    -> link layer discovery protocol
+    -> router and a switch comms
+    -> not as useful for virtual servers
+  => Cacti
+    -> measure, improve, repeat
+    -> monitor bandwidth from server hardware side
+    -> actionable data
+  => Iperf
+    -> network testing tool
+    -> find maximum bandwidth between two points
+    -> requires access to both endpoints
+    -> seriously consumes bandwidth, don't put it in your datacenter
+
+
+
+Solving Embarrassingly Obvious Problems in Code (10:40)
+=======================================================
+The three commandments in his "religion"
+
+1. Get Something to Work
+  => skeptical on design, prefers mechanics, physical reference
+
+2. Ask "what's going on?"
+  => difficult to forecast on an entire design
+  => get something working, what's successful "tactile"
+
+3. If something isn't obvious, make it obvious
+  => mechanically simple, reasonable
+  => front-load your brain process thinking what you want to do
+  => engineering oriented
+  => carefully dissect big problems
+
+Programmers end their process when "it's done" .. all the tests pass
+  => in fact that's a starting point
+
+Refactoring
+  => take a "wall of code", break it down into a story
+  => make something that's not obvious, make it obvious
+  => sort functions clearly explaining what it does
+
+Benefits
+  => Obviousness
+  => Separation of concerns: self-contained, coherent, stays working when set down
+  => Limited surface area for bugs
+  => Improved testability
+  => Framework for reasoning about change
+    => testing becomes focused
+    => don't test everything based on fear from "wall of code"
+    => skip some testing because it can be reasoned about as
+    => it's OK to loose track of things if they can be easily reasoned
+
+A sub assembly process
+
+
+Practicing Deployment
+=====================
+@lxt
+https://speakerdeck.com/lauraxt/practicing-deployment
+Maturity model
+  => chaotic "heroics" - startup
+  => repeatable: documented -
+    => after the MVP
+    => after some disasters
+    => push less often
+  => defined: standard process -
+    => not just tribal knowledge
+    => done my a sysadmin
+    => finally!, happy!
+  => managed: measuring everything -
+    => automated
+    => packaging, build process
+    => automated verification, testing
+    =>
+  => optimizing: continually improving -
+   => no drama in deployment
+   => often, could be continuous
+   => typically lots of test automation
+   => lightweight cost of deployment
+
+How much do we ship? Size.
+  => per-patch earliest on
+  => feature oriented (slower)
+  => releases (much slower, product-oriented)
+  => back to features
+  => back to per-patch
+
+Velocity
+  => Critical mass
+    => "enough stuff to release"
+    => MVP is justifiable, but not past
+    => smallest quantum with value to a user (product people like this)
+    => danger is a perfectionist won't pull the trigger
+    => can make it very much like a juggernaut and intimidating
+  => Single hard deadline
+    => we will ship feature X on date Y
+    => marketing driven
+    => an immovable deadline forces scope cut
+  => Train model
+    => Release every Wednesday
+    => to a routine schedule
+    => whatever is ready to ship, ships
+    => takes off tremendous pressure off people
+    => something "misses the train" realize there's another one next time, soon
+  => Continuous deployment
+    => is discreet in fact
+    => ship each change as soon as it's done
+
+Tools and Practices
+  => Source code management
+    => Branch per bug, branch per feature
+    => master stable, or unstable, whatever
+    => tag per push if not after every completed item
+    => tag good for knowing where to roll back to
+
+  => Dev environment
+    => dev laptop is a horrible environment
+    => Let's use Vagrent to dev from, but VMs can be hard to maintain
+    => Production databases hard to develop,
+    => Public "fake data" API that all can develop front-end against
+    => Lightweight setup and tear down VMs as a "try" server
+    => "try" server in a public environment
+
+  => Staging environment
+    => must reflect production
+    => hardware, memory, realistic traffic and load
+    => staging must be monitored -> does the DB fall down, bad code smell
+
+  => One box fail
+    => Staging needs to be more than one box
+    => Whatever prod has multiples of staging needs similar
+    =>
+
+  => "Leeroy" integrates with GIT documenting a pull request has passed/failed
+
+  => Deployment
+    => automate it, no matter what
+    => deploy the same way in staging as production
+
+  => Testing
+    => feature tests on unstable
+    => full tests on stage
+    => full tests on production (verification)
+    => Triage: 1. low-risk for programmers, 2. high-risk needs Q/A
+
+  => Measurement
+    => Monitoring: must know if things are faster or slower
+    => Performance testing
+    => Instrument everything, prefer data capture over visualizing
+    => Visualize and monitor limited to start
+
+    => Field guide to human failure
+
+  => Quantum of Deployment (Erik Kastner)
+    => minimize effort, ceremony, etc.
+
+  => Chemspill rather than Firedrill
+
+  => Rollback descision points
+    => what measurements happen on a new deployment
+    => bad/negative measurements
+
+  => Feature switches
+    => turn on a feature for a subset of users, measure, track
+    => turn it on for everybody
+    => turn off items if having problems with unexpected load
+      (trade of photo sharing for new billing)
+
+  =>
+
+
+
+
+
+
